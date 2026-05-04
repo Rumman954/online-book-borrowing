@@ -28,7 +28,11 @@ export default async function ProfilePage() {
         <div className="relative mx-auto h-32 w-32 shrink-0 overflow-hidden rounded-full bg-base-200 ring-2 ring-[var(--library-sage)]">
           {u.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={u.image} alt="" className="h-full w-full object-cover" />
+            <img
+              src={u.image}
+              alt={u.name ? `${u.name} profile photo` : "Profile photo"}
+              className="h-full w-full object-cover"
+            />
           ) : (
             <div className="flex h-full items-center justify-center text-3xl">📖</div>
           )}

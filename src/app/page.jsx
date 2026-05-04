@@ -54,11 +54,11 @@ export default async function HomePage() {
                 </div>
                 <div className="relative mx-auto my-2 h-40 w-full max-w-[340px]">
                   <Image
-                    src="/images/shelves-and-stories-logo.png"
+                    src="/images/Shelves & Stories.png"
                     alt="Shelves & Stories"
                     fill
                     className="object-contain"
-                    sizes="240px"
+                    sizes="340px"
                     priority
                   />
                 </div>

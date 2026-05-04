@@ -5,6 +5,19 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 
+function normalizeImageInput(rawValue) {
+  const value = rawValue.trim();
+  if (!value) return undefined;
+  if (
+    value.startsWith("http://") ||
+    value.startsWith("https://") ||
+    value.startsWith("/")
+  ) {
+    return value;
+  }
+  return `/images/${value}`;
+}
+
 export function EditProfileForm({ initialName, initialImage }) {
   const router = useRouter();
   const [name, setName] = useState(initialName);
@@ -17,7 +30,7 @@ export function EditProfileForm({ initialName, initialImage }) {
     try {
       const { error } = await authClient.updateUser({
         name,
-        image: image.trim() || undefined,
+        image: normalizeImageInput(image),
       });
       if (error) {
         toast.error(error.message ?? "Update failed.");
@@ -51,9 +64,9 @@ export function EditProfileForm({ initialName, initialImage }) {
       <label className="form-control w-full">
         <span className="label-text font-medium">Image URL</span>
         <input
-          type="url"
+          type="text"
           className="input input-bordered w-full"
-          placeholder="https://…"
+          placeholder="https://... or /images/your-file.png"
           value={image}
           onChange={(e) => setImage(e.target.value)}
         />
