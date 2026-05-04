@@ -14,6 +14,7 @@ const vercelUrl = process.env.VERCEL_URL
   : null;
 const trustedOrigins = [
   "http://localhost:3000",
+  "https://*.vercel.app",
   process.env.BETTER_AUTH_URL,
   process.env.NEXT_PUBLIC_APP_URL,
   vercelUrl,
