@@ -61,11 +61,11 @@ Create OAuth credentials in [Google Cloud Console](https://console.cloud.google.
 
 ## Project structure (abbreviated)
 
-- `src/lib/auth.ts` — Better Auth server config  
-- `src/lib/auth-client.ts` — React client  
-- `src/lib/books.ts` — Book queries + borrow  
+- `src/lib/auth.js` — Better Auth server config  
+- `src/lib/auth-client.js` — React client  
+- `src/lib/books.js` — Book queries + borrow  
 - `src/app/api/books/` — Books REST API  
-- `src/proxy.ts` — Next.js 16 proxy for protected routes  
+- `src/proxy.js` — Next.js 16 proxy for protected routes  
 
 ## Assignment notes
 

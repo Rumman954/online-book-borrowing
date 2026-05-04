@@ -40,9 +40,6 @@ export default async function BookDetailPage({ params }) {
             {book.title}
           </h1>
           <p className="text-lg font-medium opacity-80">by {book.author}</p>
-          <p className="text-lg font-semibold text-[var(--library-accent)]">
-            Price: ৳{book.price}
-          </p>
           <p className="leading-relaxed opacity-85">{book.description}</p>
           <p className="text-lg font-semibold text-[var(--library-sage)]">
             {book.available_quantity > 0
