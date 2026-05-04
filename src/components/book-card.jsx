@@ -27,6 +27,9 @@ export function BookCard({
             {book.title}
           </h2>
           <p className="text-sm opacity-70">{book.author}</p>
+          <p className="mt-1 text-sm font-semibold text-[var(--library-sage)]">
+            ৳{book.price}
+          </p>
         </div>
         <div className="card-actions mt-auto justify-end">
           <Link href={href} className="btn btn-sm bg-[var(--library-sage)] text-[var(--library-paper)] border-none hover:brightness-95">

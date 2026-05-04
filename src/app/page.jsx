@@ -65,6 +65,9 @@ export default async function HomePage() {
                 <p className="text-sm opacity-70">
                   {featured[0]?.author ?? "Browse All Books to start borrowing."}
                 </p>
+                <p className="text-sm font-semibold text-[var(--library-sage)]">
+                  {featured[0]?.price ? `৳${featured[0].price}` : ""}
+                </p>
               </div>
             </div>
           </div>

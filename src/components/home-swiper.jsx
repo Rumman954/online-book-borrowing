@@ -54,6 +54,9 @@ export function HomeSwiper({ books }) {
                   {book.title}
                 </p>
                 <p className="text-sm opacity-70">{book.author}</p>
+                <p className="mt-1 text-sm font-semibold text-[var(--library-sage)]">
+                  ৳{book.price}
+                </p>
               </div>
             </div>
           </SwiperSlide>

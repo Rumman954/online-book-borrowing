@@ -62,9 +62,6 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-[color-mix(in_oklab,var(--library-ink)_8%,transparent)] py-4 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} Shelves &amp; Stories. Crafted for learners.
-      </div>
     </footer>
   );
 }
