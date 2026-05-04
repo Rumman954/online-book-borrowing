@@ -9,6 +9,17 @@ if (!uri) {
 }
 
 const dbName = process.env.MONGODB_DB_NAME ?? "online_book_borrowing";
+const vercelUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL.replace(/\/$/, "")}`
+  : null;
+const trustedOrigins = [
+  "http://localhost:3000",
+  process.env.BETTER_AUTH_URL,
+  process.env.NEXT_PUBLIC_APP_URL,
+  vercelUrl,
+]
+  .filter(Boolean)
+  .map((url) => url.replace(/\/$/, ""));
 
 const mongoClient = new MongoClient(uri, {
   serverSelectionTimeoutMS: 5_000,
@@ -36,10 +47,6 @@ export const auth = betterAuth({
         }
       : {}),
   },
-  trustedOrigins: [
-    "http://localhost:3000",
-    ...(process.env.BETTER_AUTH_URL ? [process.env.BETTER_AUTH_URL] : []),
-    ...(process.env.NEXT_PUBLIC_APP_URL ? [process.env.NEXT_PUBLIC_APP_URL] : []),
-  ],
+  trustedOrigins,
   plugins: [nextCookies()],
 });
