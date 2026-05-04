@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+:root {
+  --library-ink: #1a2f2a;
+  --library-paper: #f6f1e7;
+  --library-accent: #c45c3e;
+  --library-sage: #4f7d6b;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans);
+  --font-display: var(--font-fraunces);
+}
+
+body {
+  background: var(--library-paper);
+  color: var(--library-ink);
+}
+
+.marquee-wrap {
+  animation: marquee-slide 40s linear infinite;
+}
+
+@keyframes marquee-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: oklch(55% 0.12 160) !important;
+}
