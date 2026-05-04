@@ -47,6 +47,7 @@ export default async function BookDetailPage({ params }) {
           <span className="badge badge-outline w-fit border-[var(--library-sage)]">
             {book.category}
           </span>
+          <p className="text-xs font-mono opacity-70">Book ID: {book.id}</p>
           <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-tight text-[var(--library-ink)] md:text-5xl">
             {book.title}
           </h1>
