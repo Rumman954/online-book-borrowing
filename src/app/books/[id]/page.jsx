@@ -1,12 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 import { getBookById } from "@/lib/books";
 import { BorrowButton } from "./borrow-button";
+import { ReviewsPanel } from "./reviews-panel";
 
 export const dynamic = "force-dynamic";
 
 export default async function BookDetailPage({ params }) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    redirect("/login");
+  }
+
   const { id } = await params;
   const book = await getBookById(id);
   if (!book) notFound();
@@ -46,11 +57,12 @@ export default async function BookDetailPage({ params }) {
               ? `${book.available_quantity} ${
                   book.available_quantity === 1 ? "copy" : "copies"
                 } left`
-              : "All copies are currently borrowed"}
+              : "Coming Soon"}
           </p>
           <BorrowButton bookId={book.id} initialAvailable={book.available_quantity} />
         </div>
       </div>
+      <ReviewsPanel bookId={book.id} />
     </div>
   );
 }

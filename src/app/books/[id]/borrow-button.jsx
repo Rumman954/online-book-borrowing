@@ -4,6 +4,17 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
 
+function formatDateTime(isoOrDate) {
+  const d = new Date(isoOrDate);
+  return d.toLocaleString("en-BD", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 export function BorrowButton({ bookId, initialAvailable }) {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
@@ -26,7 +37,18 @@ export function BorrowButton({ bookId, initialAvailable }) {
         toast.error(data.error ?? "Could not borrow this book.");
         return;
       }
-      toast.success("Borrow confirmed—enjoy your read!");
+      const borrowed = data?.borrowInfo?.borrowedAt
+        ? formatDateTime(data.borrowInfo.borrowedAt)
+        : null;
+      const due = data?.borrowInfo?.returnAt
+        ? formatDateTime(data.borrowInfo.returnAt)
+        : null;
+
+      toast.success(
+        borrowed && due
+          ? `Borrow confirmed. Borrowed: ${borrowed} | Return by: ${due}`
+          : "Borrow confirmed—enjoy your read!",
+      );
       router.refresh();
     } catch {
       toast.error("Something went wrong. Try again.");
@@ -42,7 +64,7 @@ export function BorrowButton({ bookId, initialAvailable }) {
       disabled={disabled}
       onClick={() => void borrow()}
     >
-      {disabled ? "Currently unavailable" : "Borrow This Book"}
+      {disabled ? "Coming Soon" : "Borrow This Book"}
     </button>
   );
 }

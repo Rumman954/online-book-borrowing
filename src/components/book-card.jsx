@@ -23,6 +23,11 @@ export function BookCard({
           <span className="badge badge-outline badge-sm border-[var(--library-sage)] text-[var(--library-ink)]">
             {book.category}
           </span>
+          {book.available_quantity <= 0 ? (
+            <span className="badge badge-sm ml-2 bg-[var(--library-accent)] text-[var(--library-paper)] border-none">
+              Coming Soon
+            </span>
+          ) : null}
           <h2 className="card-title mt-2 line-clamp-2 font-[family-name:var(--font-display)] text-base leading-snug">
             {book.title}
           </h2>

@@ -16,7 +16,7 @@ export const BOOKS_SEED = [
     description:
       "A stage-play sequel in the Wizarding World where Harry and his son face the consequences of time and legacy.",
     category: "Story",
-    available_quantity: 5,
+    available_quantity: 0,
     image_url: "/images/Story/harry-potter-and-the-cursed-child.webp",
   },
   {
@@ -56,7 +56,7 @@ export const BOOKS_SEED = [
     description:
       "An exploration of physics and the search for a unified theory to explain the fundamental forces of nature.",
     category: "Science",
-    available_quantity: 3,
+    available_quantity: 0,
     image_url: "/images/Science/The-God-Equation.jpg",
   },
   {

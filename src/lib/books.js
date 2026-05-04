@@ -2,6 +2,7 @@ import { getDb } from "@/lib/mongodb";
 import { BOOKS_SEED } from "@/lib/books-seed";
 
 const COLLECTION = "books";
+const BORROWS = "borrows";
 const META = "_app_meta";
 const SEED_LOCK_ID = "books_seed_v2";
 
@@ -85,10 +86,11 @@ export async function getBookById(id) {
   return col.findOne({ id }, { projection: { _id: 0 } });
 }
 
-export async function borrowBook(id) {
+export async function borrowBook(id, user) {
   await ensureBooksSeeded();
   const db = await getDb();
   const col = db.collection(COLLECTION);
+  const borrowsCol = db.collection(BORROWS);
   const result = await col.findOneAndUpdate(
     { id, available_quantity: { $gt: 0 } },
     { $inc: { available_quantity: -1 } },
@@ -100,5 +102,21 @@ export async function borrowBook(id) {
     if (!exists) return { ok: false, reason: "not_found" };
     return { ok: false, reason: "unavailable" };
   }
-  return { ok: true, book };
+
+  const borrowedAt = new Date();
+  const returnAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+  if (user?.id) {
+    await borrowsCol.insertOne({
+      userId: user.id,
+      userEmail: user.email ?? null,
+      bookId: book.id,
+      bookTitle: book.title,
+      borrowedAt,
+      returnAt,
+      returned: false,
+    });
+  }
+
+  return { ok: true, book, borrowInfo: { borrowedAt, returnAt } };
 }

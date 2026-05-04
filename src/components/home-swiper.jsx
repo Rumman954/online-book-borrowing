@@ -54,6 +54,11 @@ export function HomeSwiper({ books }) {
                   {book.title}
                 </p>
                 <p className="text-sm opacity-70">{book.author}</p>
+                {book.available_quantity <= 0 ? (
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-[var(--library-accent)]">
+                    Coming Soon
+                  </p>
+                ) : null}
               </div>
             </div>
           </SwiperSlide>

@@ -8,7 +8,6 @@ export function SiteHeader() {
 
   const handleLogout = async () => {
     await authClient.signOut();
-    window.location.href = "/";
   };
 
   return (

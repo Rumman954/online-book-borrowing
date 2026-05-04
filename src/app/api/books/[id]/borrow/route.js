@@ -12,7 +12,7 @@ export async function POST(request, context) {
     }
 
     const { id } = await context.params;
-    const result = await borrowBook(id);
+    const result = await borrowBook(id, session.user);
     if (!result.ok) {
       if (result.reason === "not_found") {
         return NextResponse.json({ error: "Book not found" }, { status: 404 });
@@ -22,7 +22,7 @@ export async function POST(request, context) {
         { status: 409 },
       );
     }
-    return NextResponse.json({ book: result.book });
+    return NextResponse.json({ book: result.book, borrowInfo: result.borrowInfo });
   } catch (e) {
     console.error(e);
     return NextResponse.json(
